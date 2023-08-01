@@ -1,0 +1,12 @@
+Move:
+  type: object
+  required:
+    - name
+  properties:
+    player:
+      type: string
+      enum:
+        - ONE
+        - TWO
+    pitNum:
+      type: integer

@@ -1,0 +1,180 @@
+openapi: 3.0.3
+info:
+  title: Kalah game API
+  description: Kalah game API
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+    description: Local server
+paths:
+  /v1/game:
+    post:
+      tags:
+        - Kalah game
+      description: Create a Kalah board and return the id
+      operationId: createGame
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'models/request/CreateJoinGameRequest.yaml#/CreateJoinGameRequest'
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "models/response/CreateGameResponse.yaml#/CreateGameResponse"
+        500:
+          description: server failure
+          content:
+            application/json:
+              schema:
+                $ref: "models/response/Error.yaml#/Error"
+  /v1/game/{gameId}:
+    get:
+      tags:
+        - Kalah game
+      description: Get the Kalah board Status
+      operationId: getGame
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "models/response/GameBoard.yaml#/GameBoard"
+        404:
+          description: Game not found
+          content:
+            application/json:
+              schema:
+                $ref: "models/response/Error.yaml#/Error"
+  /v1/game/{gameId}/join:
+    put:
+      tags:
+        - Kalah game
+      description: join
+      operationId: joinGame
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "models/request/CreateJoinGameRequest.yaml#/CreateJoinGameRequest"
+      responses:
+        200:
+          description: successful operation
+  /v1/game/{gameId}/play:
+    put:
+      tags:
+        - Kalah game
+      description: Move the stones in the pit label (pitNum)
+      operationId: play
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "models/request/Move.yaml#/Move"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "models/response/GameBoard.yaml#/GameBoard"
+components:
+  schemas:
+    House:
+      type: object
+      properties:
+        seeds:
+          type: integer
+          description: Number of seeds in the house.
+        index:
+          type: integer
+      example:
+        seeds: 4
+        index: 1
+    Store:
+      type: object
+      properties:
+        seeds:
+          type: integer
+          description: Number of seeds in the store.
+      example:
+        seeds: 0
+        index: 0
+
+    GameResultDto:
+      type: object
+      properties:
+        playerPits:
+          type: object
+          description: Houses for each player.
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/House'
+        stores:
+          type: object
+          description: Stores for each player.
+          additionalProperties:
+            $ref: '#/components/schemas/Store'
+        status:
+          type: string
+          enum: [PLAYER_ONE_WIN, PLAYER_TWO_WIN, DRAW, IN_PROGRESS]
+          description: Current game status.
+        turn:
+          type: string
+          enum: [PLAYER_ONE, PLAYER_TWO]
+          description: Current player's turn.
+      example:
+        playerPits:
+          PLAYER_ONE:
+            - { seeds: 4 }
+            - { seeds: 2 }
+            - { seeds: 1 }
+            - { seeds: 3 }
+            - { seeds: 0 }
+            - { seeds: 0 }
+          PLAYER_TWO:
+            - { seeds: 0 }
+            - { seeds: 0 }
+            - { seeds: 0 }
+            - { seeds: 0 }
+            - { seeds: 2 }
+            - { seeds: 0 }
+        stores:
+          PLAYER_ONE: { seeds: 0 }
+          PLAYER_TWO: { seeds: 0 }
+        status: IN_PROGRESS
+        turn: PLAYER_ONE
+
+
+
+
+
+
+
+

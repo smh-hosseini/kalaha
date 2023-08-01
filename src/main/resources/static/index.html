@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/dist/css/bootstrap.min.css" />
+  <script src="/webjars/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js">
+  </script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Demo</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width" />
+  <base href="/" />
+  <script type="importmap">
+	{
+		"imports": {
+			"bootstrap": "/webjars/bootstrap/dist/js/bootstrap.esm.min.js",
+			"@popperjs/core": "/webjars/popperjs__core/lib/index.js"
+		}
+	}
+</script>
+</head>
+
+<body>
+<header>
+  <h1>Kalaha Game</h1>
+</header>
+<main>
+  <div id="board">
+    <div class="row">
+      <div class="pit" onclick="pitClicked(5)"></div>
+      <div class="pit" onclick="pitClicked(4)"></div>
+      <div class="pit" onclick="pitClicked(3)"></div>
+      <div class="pit" onclick="pitClicked(2)"></div>
+      <div class="pit" onclick="pitClicked(1)"></div>
+      <div class="pit" onclick="pitClicked(0)"></div>
+    </div>
+    <div class="row">
+      <div class="kalaha"></div>
+      <!-- Empty space for the Kalaha (larger pit) -->
+    </div>
+    <div class="row">
+      <div class="pit" onclick="pitClicked(6)"></div>
+      <div class="pit" onclick="pitClicked(7)"></div>
+      <div class="pit" onclick="pitClicked(8)"></div>
+      <div class="pit" onclick="pitClicked(9)"></div>
+      <div class="pit" onclick="pitClicked(10)"></div>
+      <div class="pit" onclick="pitClicked(11)"></div>
+    </div>
+  </div>
+</main>
+
+</body>
+
+</html>

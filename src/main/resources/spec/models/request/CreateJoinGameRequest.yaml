@@ -1,0 +1,5 @@
+CreateJoinGameRequest:
+  type: object
+  properties:
+    playerName:
+      type: string

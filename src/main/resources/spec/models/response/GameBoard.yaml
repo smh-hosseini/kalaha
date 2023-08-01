@@ -1,0 +1,27 @@
+GameBoard:
+  type: object
+  properties:
+    players:
+      type: array
+      items:
+        $ref: 'Player.yaml#/Player'
+    playerPits:
+      type: object
+      description: Houses for each player.
+      additionalProperties:
+        type: array
+        items:
+          $ref: 'Pit.yaml#/Pit'
+    stores:
+      type: object
+      description: Stores for each player.
+      additionalProperties:
+        $ref: 'Pit.yaml#/Pit'
+    status:
+      type: string
+      enum: [ WAITING_FOR_PLAYER_TWO, PLAYER_ONE_WIN, PLAYER_TWO_WIN, DRAW, IN_PROGRESS ]
+      description: Current game status.
+    turn:
+      type: string
+      enum: [ ONE, TWO ]
+      description: Current player's turn.

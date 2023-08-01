@@ -1,0 +1,7 @@
+Pit:
+  type: object
+  properties:
+    index:
+      type: integer
+    seeds:
+      type: integer
